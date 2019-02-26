@@ -24,6 +24,12 @@ class JekyllPost:
             return self._post_title.replace("\"", "")
         except AttributeError:
             return ""
+    
+    def get_layout(self):
+        try:
+            return self._post_layout
+        except AttributeError:
+            return "post"
 
     def get_contents(self) -> str:
         try:
@@ -46,7 +52,12 @@ class JekyllPost:
     def set_string_date(self, string_date):
         self._post_date = string_date
     
+    def set_layout(self, layout):
+        self._post_layout = layout
+    
     def save(self):
+        if not hasattr(self, "_post_layout"):
+            self._post_layout = "post"
         f = open(self.file_path, "w")
         f.write("---\n")
         for attr in dir(self):
