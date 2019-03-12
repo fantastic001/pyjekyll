@@ -1,4 +1,4 @@
-
+import os.path 
 class JekyllPost:
 
     def __init__(self, file_path):
@@ -54,6 +54,16 @@ class JekyllPost:
     
     def set_layout(self, layout):
         self._post_layout = layout
+    
+    def get_filename(self):
+        """
+        Returns filename without extension 
+        """
+        filename = os.path.split(self.file_path)[-1]
+        if filename.split(".")[-1] in ["markdown", "md"]:
+            return ".".join(filename.split(".")[:-1])
+        else:
+            return filename 
     
     def save(self):
         if not hasattr(self, "_post_layout"):
