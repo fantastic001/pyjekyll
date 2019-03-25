@@ -13,3 +13,6 @@ class JekyllPostContainer:
     
     def get_post(self, name):
         return JekyllPost(os.path.join(self.dir_path, name + ".md"))
+    
+    def delete_post(self, name):
+        os.remove(os.path.join(self.dir_path, name + ".md"))
